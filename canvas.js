@@ -64,8 +64,7 @@ button1.addEventListener("click", function() {
     rightButton.style.display = "block";
 });
 button2.addEventListener("click", function() {
-    // Clear the canvas
-
+ 
     button1.style.display = "none";
     button2.style.display = "none";
     var creditsText =
@@ -112,8 +111,13 @@ function updateTextArea(text) {
     var index = 0;
     window.textUpdateInterval = setInterval(function() {
         if (index < text.length) {
-            textArea.innerHTML += text.charAt(index);
-            index++;
+            if (text.charAt(index) === "<" && text.substring(index, index + 4) === "<br>") {
+                textArea.innerHTML += "<br>";
+                index += 4; // Skip over "<br>"
+            } else {
+                textArea.innerHTML += text.charAt(index);
+                index++;
+            }
         } else {
             clearInterval(window.textUpdateInterval);
         }
