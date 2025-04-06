@@ -103,18 +103,21 @@ document.body.appendChild(textArea);
 
 // Update textArea content when the image changes
 function updateTextArea(text) {
-    // Make text appear letter by letter
+    // Clear any existing interval to stop previous text updates
+    if (window.textUpdateInterval) {
+        clearInterval(window.textUpdateInterval);
+    }
+
     textArea.innerHTML = ""; // Clear previous text
     var index = 0;
-    var interval = setInterval(function() {
+    window.textUpdateInterval = setInterval(function() {
         if (index < text.length) {
             textArea.innerHTML += text.charAt(index);
             index++;
         } else {
-            clearInterval(interval);
+            clearInterval(window.textUpdateInterval);
         }
     }, 50); // Adjust speed of text appearance here
-
 }
 
 // Function to resize canvas and adjust related elements
