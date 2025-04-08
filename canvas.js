@@ -213,6 +213,11 @@ function updateScene(sceneName) {
     currentImage = images[sceneName].image;
     currentText = images[sceneName].text;
 
+    // Normalize the image path for both local and GitHub Pages
+    currentImage = images[sceneName].image;
+    // Remove any leading slash and ensure proper path structure
+    currentImage = currentImage.replace(/^\//, '').replace(/^images\//, './images/');
+    
     // Stop any previous GIF animation
     if (isGif) {
         console.log("Stopping previous GIF");
@@ -220,20 +225,29 @@ function updateScene(sceneName) {
     }
 
     // Check if the image is a gif (case insensitive; adjust check as needed)
-    if (currentImage.toLowerCase().includes("/_")) {
-        console.log("Loading GIF:", currentImage);
+    if (currentImage.includes('/_')) {
+        console.log("Loading animated image:", currentImage);
         isGif = true;
-        // Reset frame counters
         currentFrame = 0;
         maxFrame = images[sceneName].frame_count - 1;
-        sqrtSize = Math.ceil(Math.sqrt(images[sceneName].frame_count));
+        
+        // Add error handling for animated image loading
+        character.onerror = function(e) {
+            console.error("Error loading animated image:", currentImage, e);
+            isGif = false;
+            ctx.fillStyle = "red";
+            ctx.fillText("Error loading animation", canvas.width/2, canvas.height/2);
+        };
+        
+        character.onload = function() {
+            console.log("Successfully loaded animated image:", currentImage);
+        };
+        
         character.src = currentImage;
-        // Set sprite dimensions as needed
         frameWidth = 1000;
         frameHeight = 1000;
-        // For GIFs the drawFrame interval will update the canvas.
         updateTextArea(currentText);
-        fadeInEffect(500);  // fade duration in ms
+        fadeInEffect(500);
     } else {
         // For non-gif images, load them normally
         character.src = currentImage;
