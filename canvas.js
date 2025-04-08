@@ -271,8 +271,7 @@ let currentFrame = 0;
 sqrtSize = Math.ceil(Math.sqrt(images[currentScene].frame_count));
 let frameWidth = 1000;
 let frameHeight = 1000;
-setInterval(drawFrame
-, 100);
+setInterval(drawFrame, 100);
 function drawFrame(){
     if (!isGif) {
         return;
@@ -293,15 +292,7 @@ function drawFrame(){
     
     // Clear canvas and draw the selected frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(
-        character, 
-        column * frameWidth, 
-        row * frameHeight, 
-        frameWidth, 
-        frameHeight, 
-        0, 0, 
-        canvas.width, canvas.height
-    );
+    ctx.drawImage(character, column * frameWidth, row * frameHeight, frameWidth, frameHeight, 0, 0, canvas.width, canvas.height);
 }
 
 
