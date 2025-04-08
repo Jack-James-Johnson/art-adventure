@@ -71,7 +71,7 @@ absentmindedly trip on a tree stump that appeared seemingly out of thin air.`,
     },
     "PICKUP":
     {
-        "image": "./images/The_Creature_right.png",
+        "image": "./images/The_Creature_Right.png",
         "frame_count":1,
         "text":`you pick up the bones and shove them into your pockets, satisfied with your
 decision. you soon realise the atmosphere has grown cold and you’re shrouded
