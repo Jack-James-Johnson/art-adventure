@@ -157,6 +157,7 @@ function resizeTextArea() {
     textArea.style.fontSize = (canvas.width * 0.03) + "px";
     textArea.style.lineHeight = "1.5";
     textArea.style.overflowY = "auto"; // Allow scrolling if text overflows
+    textArea.scrollTop = textArea.scrollHeight; // Scroll to bottom
 }
 
 // Function to resize canvas and adjust related elements
@@ -275,6 +276,7 @@ character.onload = function () {
 function updateScene(sceneName) {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    console.log("Updating scene to:", sceneName);
     currentScene = sceneName;
     currentImage = images[sceneName].image;
     currentText = images[sceneName].text;
