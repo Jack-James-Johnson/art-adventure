@@ -205,10 +205,10 @@ function positionButtons() {
     const canvasRect = canvas.getBoundingClientRect();
     
     // Calculate button widths based on text content
-    const leftButtonText = leftButton.querySelector('span').textContent;
-    const rightButtonText = rightButton.querySelector('span').textContent;
-    const leftButtonWidth = leftButtonText.length * 25; // Approximate width per character
-    const rightButtonWidth = rightButtonText.length * 25;
+    let leftButtonText = leftButton.querySelector('span').textContent;
+    let rightButtonText = rightButton.querySelector('span').textContent;
+    let leftButtonWidth = leftButtonText.length * 25; // Approximate width per character
+    let rightButtonWidth = rightButtonText.length * 25;
     
     // Position left button at bottom left of canvas
     leftButton.style.position = "absolute";
