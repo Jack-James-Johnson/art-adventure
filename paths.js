@@ -177,8 +177,8 @@ YOU ESCAPED!`,
     rightText: null,
   },
   approach2: {
-    image: "./images/initial.png",
-    frame_count: 1,
+    image: "./images/_The_Creature_Norm.png",
+    frame_count: 7,
     text: `Two glowing eyes appear before yours, the rest of your vision is blurred. “oh my
     it's been a long time since your kind has stumbled upon this place, just how did you get here? oh never
     mind how….. you're no longer in the world you're familiar with but one of art.. a place that precedes you
@@ -191,8 +191,8 @@ YOU ESCAPED!`,
     rightText: "TALK",
   },
   escape: {
-    image: "./images/_Death_Scene.png",
-    frame_count: 9,
+    image: "./images/_The_Creature_Death.png",
+    frame_count:11,
     text: `You attempt to run away however you still cannot move, the
     creature senses tension “another lost child too far gone…. if
     something isn't working you should end it…” the eyes glow red,
@@ -227,8 +227,8 @@ YOU ESCAPED!`,
     rightText: "RIGHT",
   },
   bones1: {
-    image: "./images/_Death_Scene.png",
-    frame_count: 9,
+    image: "./images/_The_Creature_Death.png",
+    frame_count: 11,
     text: `You kneel before the mound of bones and find yourself
     uncontrollably crying as your life flashes before your
     eyes, your mistakes, regrets, everything you wish you

@@ -4,6 +4,76 @@ console.log("canvas.js loaded");
 var container = document.createElement("div");
 container.id = "container";
 document.body.appendChild(container);
+// audio
+function PlayMusic(){
+    console.log("Playing music");
+    var play=document.getElementById("music");
+    play.volume = 0.1;
+    play.play();
+}
+function PlayDeath()
+{
+    console.log("Playing death music");
+    var play=document.getElementById("death");
+    play.volume = 0.1;
+    play.play();
+}
+function PlayTextAudio()
+{
+    var play=document.getElementById("text");
+    play.volume = 0.1;
+    play.play();
+}
+function StopTextAudio()
+{
+    var play=document.getElementById("text");
+    play.pause();
+    play.currentTime = 0;
+}
+
+function stopAllAudio() {
+    const musicPlayer = document.getElementById("music");
+    const textSound = document.getElementById("text");
+    
+    // Stop music
+    if (musicPlayer) {
+        musicPlayer.pause();
+        musicPlayer.currentTime = 0;
+    }
+    
+    // Stop text sound
+    if (textSound) {
+        textSound.pause();
+        textSound.currentTime = 0;
+    }
+}
+let prevText = "";
+
+// Handle page visibility change
+document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+        stopAllAudio();
+        updateTextArea("",0);
+    } else {
+        // Optionally restart music when page becomes visible again
+        setTimeout(PlayMusic, 100);
+        updateTextArea(prevText,0);
+    }
+});
+
+// Handle page unload
+window.addEventListener("beforeunload", function() {
+    stopAllAudio();
+});
+
+// Handle mobile specific events
+window.addEventListener("pagehide", function() {
+    stopAllAudio();
+});
+
+window.addEventListener("blur", function() {
+    stopAllAudio();
+});
 
 var canvas = document.getElementById("canvas");
 canvas.id = "canvas";
@@ -99,6 +169,7 @@ container.appendChild(textArea);
 
 // Update textArea content when the image changes
 function updateTextArea(text,interval=25) {
+    prevText = text; // Store the current text
     // Clear any existing interval to stop previous text updates
     if (window.textUpdateInterval) {
         clearInterval(window.textUpdateInterval);
@@ -107,6 +178,7 @@ function updateTextArea(text,interval=25) {
     textArea.innerHTML = ""; // Clear previous text
     var index = 0;
     window.textUpdateInterval = setInterval(function () {
+        PlayTextAudio();
         if (index < text.length) {
             if (text.charAt(index) === "<" && text.substring(index, index + 4) === "<br>") {
                 textArea.innerHTML += "<br>";
@@ -139,8 +211,10 @@ function updateTextArea(text,interval=25) {
                 index++;
             }
         } else {
+            StopTextAudio();
             clearInterval(window.textUpdateInterval);
         }
+        textArea.scrollTop = textArea.scrollHeight; // Scroll to bottom
     }, interval); // Adjust speed of text appearance here
 }
 function resizeTextArea() {
@@ -155,9 +229,9 @@ function resizeTextArea() {
     textArea.style.width = canvas.width + "px"; // Match canvas width
     textArea.style.height = remainingHeight + "px";
     textArea.style.fontSize = (canvas.width * 0.03) + "px";
+    textArea.style.textAlign = "left"; 
     textArea.style.lineHeight = "1.5";
     textArea.style.overflowY = "auto"; // Allow scrolling if text overflows
-    textArea.scrollTop = textArea.scrollHeight; // Scroll to bottom
 }
 
 // Function to resize canvas and adjust related elements
@@ -207,8 +281,8 @@ function positionButtons() {
     // Calculate button widths based on text content
     let leftButtonText = leftButton.querySelector('span').textContent;
     let rightButtonText = rightButton.querySelector('span').textContent;
-    let leftButtonWidth = leftButtonText.length * 25; // Approximate width per character
-    let rightButtonWidth = rightButtonText.length * 25;
+    let leftButtonWidth = Math.max(leftButtonText.length * 25,90); // Approximate width per character
+    let rightButtonWidth = Math.max(rightButtonText.length * 25, 90); // Ensure it fits within canvas width
     
     // Position left button at bottom left of canvas
     leftButton.style.position = "absolute";
@@ -253,6 +327,7 @@ function updateButtons(sceneName) {
     else {
         resetButton.style.display = "none";
     }
+    positionButtons();
 }
 
 // Attach resize event listener
@@ -291,7 +366,9 @@ function updateScene(sceneName) {
         console.log("Stopping previous GIF");
         isGif = false;
     }
-
+    if (currentImage.includes("Death")) {
+        PlayDeath();
+    }
     // Check if the image is a gif (case insensitive; adjust check as needed)
     if (currentImage.includes('/_')) {
         console.log("Loading animated image:", currentImage);
@@ -322,7 +399,6 @@ function updateScene(sceneName) {
         character.onload = function () {
             ctx.drawImage(character, 0, 0, canvas.width, canvas.height);
             updateTextArea(currentText);
-
         };
     }
 }
@@ -339,6 +415,7 @@ function fadeInEffect(duration) {
         // For GIFs, the drawFrame will be continuously updating; this overlay sits on top.
         ctx.save();
         ctx.fillStyle = "rgba(0, 0, 0, " + alpha + ")";
+        console.log("Fading in with alpha:", alpha);
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.restore();
         if (elapsed < duration) {
@@ -428,3 +505,6 @@ function createButton(text) {
     button.innerHTML = '<div class="button"><span>' + text + '</span></div>';
     return button;
 }
+setTimeout(PlayMusic,1000);
+
+
