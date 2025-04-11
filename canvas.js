@@ -375,31 +375,16 @@ function updateScene(sceneName) {
         isGif = true;
         currentFrame = 0;
         maxFrame = images[sceneName].frame_count - 1;
-
-        // Add error handling for animated image loading
-        character.onerror = function (e) {
-            console.error("Error loading animated image:", currentImage, e);
-            isGif = false;
-            ctx.fillStyle = "red";
-            ctx.fillText("Error loading animation", canvas.width / 2, canvas.height / 2);
-        };
-
-        character.onload = function () {
-            console.log("Successfully loaded animated image:", currentImage);
-        };
-
-        character.src = currentImage;
+        character = imageCache[sceneName];
         frameWidth = 1000;
         frameHeight = 1000;
         updateTextArea(currentText);
         fadeInEffect(500);
     } else {
-        // For non-gif images, load them normally
-        character.src = currentImage;
-        character.onload = function () {
-            ctx.drawImage(character, 0, 0, canvas.width, canvas.height);
-            updateTextArea(currentText);
-        };
+        character = imageCache[sceneName];
+        ctx.drawImage(character, 0, 0, canvas.width, canvas.height);
+        updateTextArea(currentText);
+        fadeInEffect(500);
     }
 }
 
@@ -506,5 +491,160 @@ function createButton(text) {
     return button;
 }
 setTimeout(PlayMusic,1000);
+
+// Preload all images
+function preloadImages() {
+    console.log("Starting image preload...");
+    const imageCache = {};
+    let loadedImages = 0;
+    const totalImages = Object.keys(images).length;
+
+    return new Promise((resolve) => {
+        // Show loading progress on canvas
+        function updateLoadingProgress() {
+            const progress = Math.floor((loadedImages / totalImages) * 100);
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "black";
+            ctx.fillText(`Loading... ${progress}%`, canvas.width / 2, canvas.height / 2);
+        }
+
+        // Load each image
+        for (const sceneName in images) {
+            const imgPath = images[sceneName].image;
+            const img = new Image();
+            
+            img.onload = function() {
+                loadedImages++;
+                imageCache[sceneName] = img;
+                updateLoadingProgress();
+                
+                if (loadedImages === totalImages) {
+                    console.log("All images preloaded successfully");
+                    resolve(imageCache);
+                }
+            };
+
+            img.onerror = function(e) {
+                console.error(`Error loading image for scene ${sceneName}:`, e);
+                loadedImages++;
+                updateLoadingProgress();
+                
+                if (loadedImages === totalImages) {
+                    resolve(imageCache);
+                }
+            };
+
+            img.src = imgPath;
+        }
+    });
+}
+
+// Update your initialization code to use preloaded images
+async function initGame() {
+    const imageCache = await preloadImages();
+    
+    // Start the game only after images are loaded
+    currentScene = "menu";
+    currentImage = images[currentScene].image;
+    currentText = images[currentScene].text;
+    character = imageCache[currentScene];
+    
+    updateScene(currentScene);
+    resizeCanvas();
+    positionButtons();
+    setTimeout(PlayMusic, 1000);
+}
+
+// Start the game
+initGame();
+
+var imageCache = {}; // Make imageCache global
+
+async function initGame() {
+    // Show initial loading screen
+    ctx.fillStyle = "black"; 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.fillText("Loading...", canvas.width / 2, canvas.height / 2);
+
+    // Preload images
+    await preloadImages();
+    
+    // Initialize game state
+    currentScene = "menu";
+    currentImage = images[currentScene].image;
+    currentText = images[currentScene].text;
+    
+    // Update scene with preloaded image
+    updateScene(currentScene);
+    resizeCanvas();
+    positionButtons();
+    setTimeout(PlayMusic, 1000);
+}
+
+function updateScene(sceneName) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    currentScene = sceneName;
+    currentImage = images[sceneName].image;
+    currentText = images[sceneName].text;
+
+    if (currentImage.includes("Death")) {
+        PlayDeath();
+    }
+
+    // Use preloaded image from cache
+    if (currentImage.includes('/_')) {
+        console.log("Loading animated image:", currentImage);
+        isGif = true;
+        currentFrame = 0;
+        maxFrame = images[sceneName].frame_count - 1;
+        character = imageCache[sceneName];
+        frameWidth = 1000;
+        frameHeight = 1000;
+    } else {
+        isGif = false;
+        ctx.drawImage(imageCache[sceneName], 0, 0, canvas.width, canvas.height);
+    }
+
+    updateTextArea(currentText);
+    fadeInEffect(500);
+}
+
+function preloadImages() {
+    return new Promise((resolve) => {
+        let loadedImages = 0;
+        const totalImages = Object.keys(images).length;
+
+        for (const sceneName in images) {
+            const img = new Image();
+            img.onload = function() {
+                loadedImages++;
+                imageCache[sceneName] = img;
+                
+                // Update loading progress
+                const progress = Math.floor((loadedImages / totalImages) * 100);
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "white";
+                ctx.fillText(`Loading... ${progress}%`, canvas.width / 2, canvas.height / 2);
+                
+                if (loadedImages === totalImages) {
+                    resolve();
+                }
+            };
+            img.onerror = function(e) {
+                console.error(`Error loading image for scene ${sceneName}:`, e);
+                loadedImages++;
+                if (loadedImages === totalImages) {
+                    resolve();
+                }
+            };
+            img.src = images[sceneName].image;
+        }
+    });
+}
 
 
