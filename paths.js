@@ -80,7 +80,7 @@ directions, do you approach?`,
     rightText: "YES",
   },
   dont_approach_creature: {
-    image: "./images/_Twins_pointing.png",
+    image: "./images/_Twins_posing.png",
     frame_count: 3,
     text: `The figure doesn't look comforting. It looks creepy. and probably wants those bones you grabbed
 earlier. you turn and walk in another direction, there's a rustle in the brush ahead, and before you
@@ -262,7 +262,7 @@ You are surrounded by singing stars.`,
     rightText: null,
   },
   respond: {
-    image: "./images/initial.png",
+    image: "./images/tootsie_with_bones.png",
     frame_count: 1,
     text: `>Yes i know that… <br>
         “you must choose your own path in this life..
@@ -300,7 +300,7 @@ You are surrounded by singing stars.`,
     rightText: null,
   },
   bones2: {
-    image: "./images/initial.png",
+    image: "./images/hands.png",
     frame_count: 1,
     text: `You kneel before the mound of bones, each one
     suddenly looking so unique and inspiring. you can't
@@ -316,8 +316,8 @@ You are surrounded by singing stars.`,
     rightText: "TRUST",
   },
   betray: {
-    image: "./images/_Death_Scene.png",
-    frame_count: 9,
+    image: "./images/_The_Creature_Death.png",
+    frame_count: 11,
     text: `You feel powerful. powerful enough to escape
     the grasp this creature has on you. but before
     you can even move the creature has figured

@@ -444,7 +444,7 @@ function drawFrame() {
     }
 
     // Use fixed 3 columns for the sprite sheet layout
-    let numberOfColumns = 3;
+    let numberOfColumns = images[currentScene].frame_count < 4 ? 2: 3;
     let column = currentFrame % numberOfColumns;
     let row = Math.floor(currentFrame / numberOfColumns);
 
