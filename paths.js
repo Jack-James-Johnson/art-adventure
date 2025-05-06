@@ -41,7 +41,7 @@ var images = {
     rightText: null,
   },
   forest_right3: {
-    image: "./images/initial.png",
+    image: "./images/bones.png",
     frame_count: 1,
     text: `As you delve deeper into the heart of the forest, you spot a suspicious pile of bones on the
             side of the pathway. perhaps they could be useful on your jouney, or maybe its a morbid trap, do
@@ -59,7 +59,8 @@ var images = {
 walking without messing with them. with each step you think more and more
 about them, they eventually consume your thoughts. While your mind is so
 wrapped up around these bones, your attention lacks on the path ahead, you
-absentmindedly trip on a tree stump that appeared seemingly out of thin air.`,
+absentmindedly trip on a tree stump that appeared seemingly out of thin air.<br>
+YOU DIE`,
     left: null,
     leftText: null,
     right: null,
@@ -79,75 +80,125 @@ directions, do you approach?`,
     rightText: "YES",
   },
   dont_approach_creature: {
-    image: "./images/The_Creature_Right.png",
-    frame_count: 1,
-    text: `The figure doesn't look comforting. It looks creepy. and probably wants
-those bones you grabbed earlier. you turn and walk in another
-direction, there's a rustle in the brush ahead, and before you can avoid
-interaction again two figures tumble out from within. instantly the lamb
-figure demands "My brother is hungry! He lost the worlds shiniest
-apple earlier in that tree over there, can you go get it for him? We are
-twins you see so unfortunately we cannot be apart !"`,
+    image: "./images/_Twins_pointing.png",
+    frame_count: 3,
+    text: `The figure doesn't look comforting. It looks creepy. and probably wants those bones you grabbed
+earlier. you turn and walk in another direction, there's a rustle in the brush ahead, and before you
+can avoid interaction again two figures tumble out from within. Instantly, the lamb figure demands "My
+brother is hungry! Go to the spine of the world, and pick us the forbidden fruit"`,
     left: "twins_death",
     leftText: "SASS",
     right: "fetch",
     rightText: "FETCH",
   },
   twins_death: {
-    image: "./images/_Death_Scene.png",
-    frame_count: 9,
+    image: "./images/_Twins_Death.png",
+    frame_count: 3,
     text: `the joy from their faces leave, and all colour leaves the forest,
-they respond together "wheres the fun in not outsourcing?"
-you die`,
+    <br>YOU DIE`,
     left: null,
     leftText: null,
     right: null,
     rightText: null,
   },
   fetch: {
-    image: "./images/initial.png",
+    image: "./images/Apple_in_large_tree.png",
     frame_count: 1,
-    text: `You look towards where the lamb is pointing and see a speck of
-red on the tallest branch of a tree, as you begin walking
-towards it the tree gets larger and larger, the apple seems
-higher than possibly climbable for a human, you get an idea,
-what if you threw something to get it down?`,
-    left: "throw_bones",
-    leftText: "THROW",
+    text: `you look towards where the lamb is pointing
+and see a speck of red on the tallest branch
+of a tree, as you begin walking towards it
+the tree and it becomes more mighty, dense
+branches invading all free space, with thick
+winding roots. You smell smoke emitting
+through the roots`,
+    left: "dig",
+    leftText: "DIG",
     right: "climb_tree",
     rightText: "CLIMB",
   },
-  throw_bones: {
-    image: "./images/_Death_Scene.png",
-    frame_count: 9,
-    text: `You thew your bone, but unfortunately you miss, the femur you
-threw overshoots. You see the impatient faces of the
-twins grow closer in the blink of an eye. YOU DIE`,
+  dig: {
+    image: "./images/roots_Glow.png",
+    frame_count: 1,
+    text: `You fear the climb and so search for a fallen apple; you smell smoke
+    rising from the roots. Curious, you begin to dig through the gnarled
+    roots. As you dig deeper, you find that you are surrounded by dark
+    twisting bodies, petrichor flesh all knotted together in masses.
+    Digging, you can no longer distinguish earth from flesh as they form
+    and crumble in your view.
+    The smell of smoke grows stronger, stinging your eyes. You hear a
+    voice from behind you whisper
+    “Bones…”.`,
+    left: "return_bones",
+    leftText: "RTRN",
+    right: "dig_deeper",
+    rightText: "GIVE",
+  },
+  return_bones: {
+    image: "./images/tootsie_with_bones.png",
+    frame_count: 1,
+    text: `You feel the bones stuffed in your pockets. You hear the voice again,
+“Bones…”.
+You plant the bones in the midst of the bodies. You feel the gap behind you
+close as you are embraced by the roots of the tree coiling around you
+gently. You fall asleep.`,
     left: null,
     leftText: null,
     right: null,
     rightText: null,
   },
-  climb_tree: {
-    image: "./images/initial.png",
+  dig_deeper1: {
+    image: "./images/roots_Glow.png",
     frame_count: 1,
-    text: `It looks exhausting, but you can do it, you begin scaling
-the tree, as the twins watch from below, hopeful.
-when the apple is within your arms reach, you are
-enchanted by its shine and perfection, it looks
-delicious your mouth waters just by looking at it,`,
+    text: `You ignore the voice and dig to the source of the smoke now filling your face. You
+find within blackened hollow husks of the lowest bodies; a fire. You carry the
+searing flame in one hand as your claw back out of the knotty pit.`,
+    left: "dig_deeper2",
+    leftText: "NEXT",
+    right: null,
+    rightText: null,
+  },
+  dig_deeper2: {
+    image: "./images/Brandish_fire.png",
+    frame_count: 1,
+    text: `Once you break the surface you are confronted by the angry twins; before they can
+attack you, you brandish the fire at them. They waver and wobble; circling you
+unable to approach as you run with the dying fire.`,
+    left: "deeper_left",
+    leftText: "LEFT",
+    right: "deeper_right",
+    rightText: "RIGHT",
+  },
+  deeper_left: {},
+  deeper_right: {
+    image: "Cabin_Ext.png",
+    frame_count: 1,
+    text: `Darkness starts to envelop you as the fire dwindles, you see a
+cabin the distance,`,
+    left: "cabin",
+    leftText: "NEXT",
+    right: null,
+    rightText: null,
+  },
+  climb_tree: {
+    image: "./images/_Apple_hand.png",
+    frame_count: 8,
+    text: `After climbing for what seems like hours,
+  you begin to hear distant music. Finally
+  you see the apple, it appears so tempting
+  with its fresh crisp exterior and fanfare
+  of invisible music.`,
     left: "eat_apple",
     leftText: "EAT",
     right: "throw_apple",
-    rightText: "GIVE",
+    rightText: "THROW",
   },
   eat_apple: {
-    image: "./images/_Death_Scene.png",
-    frame_count: 9,
-    text: `you look down at the twins as you take in the
-divine flavours of the apple, unfortunately it
-would be the last thing you would ever eat
-you die`,
+    image: "./images/_Twins_Death.png",
+    frame_count: 3,
+    text: `Upon biting the apple you are struck with all the
+knowledge of the universe including the vision of your death dealt by the
+angry twins once you climb down.<br>
+YOU DIE`,
     left: null,
     leftText: null,
     right: null,
@@ -156,20 +207,28 @@ you die`,
   throw_apple: {
     image: "./images/The_Creature_Right.png",
     frame_count: 1,
-    text: `You throw the apple down, the crow opens its
-beak and the shining red disappears down its
-gullet ithou taking a beath, the crow flies
-towards you and takes you above the canopy. <br>
-YOU ESCAPED!`,
+    text: `After throwing the apple and climbing down, you see the twins
+devouring the apple. They bow in gratitude<br>
+“Follow us”<br>
+They take you by the hand and fly you into the canopy of the great
+tree; the music grows louder and louder.
+Finally you are brought to the black top of the tree, where a warmly
+glowing star rests on a branch.
+The twins point to the light.<br>
+“Take it, it's yours”<br>
+After grabbing the star you are dressed in sparking prismatic light
+and float into the dark of the night as stars flicker and torch your
+way.<br>
+You are surrounded by singing stars.`,
     left: null,
     leftText: null,
     right: null,
     rightText: null,
   },
   approach: {
-    image: "./images/The_Creature_Right.png",
+    image: "./images/first_look_at_creature.png",
     frame_count: 1,
-    text: `you approach to ask for help but as you grow closer you realise that it is not human, but something
+    text: `You approach to ask for help but as you grow closer you realise that it is not human, but something
     otherworldly, an amalgamation of life and death. you find yourself paralysed where you stand.`,
     left: "approach2",
     leftText: "NEXT",
@@ -192,11 +251,11 @@ YOU ESCAPED!`,
   },
   escape: {
     image: "./images/_The_Creature_Death.png",
-    frame_count:11,
+    frame_count: 11,
     text: `You attempt to run away however you still cannot move, the
     creature senses tension “another lost child too far gone…. if
-    something isn't working you should end it…” the eyes glow red,
-    you die.`,
+    something isn't working you should end it…” the eyes glow red,<br>
+    YOU DIE.`,
     left: null,
     leftText: null,
     right: null,
@@ -233,7 +292,8 @@ YOU ESCAPED!`,
     uncontrollably crying as your life flashes before your
     eyes, your mistakes, regrets, everything you wish you
     could've done differently. “the decay won't stop.. i
-    suppose it was meant to happen this way….” you die.`,
+    suppose it was meant to happen this way….”<br>
+    YOU DIE.`,
     left: null,
     leftText: null,
     right: null,
@@ -262,7 +322,8 @@ YOU ESCAPED!`,
     the grasp this creature has on you. but before
     you can even move the creature has figured
     out your intentions, “foolish child…. you have
-    chosen the wrong path” you die`,
+    chosen the wrong path”<br>
+    YOU DIE`,
     left: null,
     leftText: null,
     right: null,
@@ -284,9 +345,8 @@ YOU ESCAPED!`,
     right: null,
     rightText: null,
   },
-  forest_left:
-  {
-    image: "./images/initial.png",
+  forest_left: {
+    image: "./images/Clearing_Sketch.png",
     frame_count: 1,
     text: `You head towards the left path, after walking for some time the trees begin to thin, and you have come
 across a clearing. The water is eerily clear, devoid of plant life and algae growing from its waters, the
@@ -297,9 +357,8 @@ water?.`,
     right: "drink",
     rightText: "DRINK",
   },
-  "drink":
-  {
-    image: "./images/initial.png",
+  drink: {
+    image: "./images/Clearing_Amplified.png",
     frame_count: 1,
     text: `Everything around you become distorted and the forest feels more alive, breathing with you. you feel the
 paranoid urge to run.`,
@@ -308,103 +367,209 @@ paranoid urge to run.`,
     right: "stay",
     rightText: "STAY",
   },
-  run:
-  {
+  run: {
     image: "./images/_Death_Scene.png",
     frame_count: 9,
-    text: `you run in circles till you die in a deluded haze`,
+    text: `you run in circles till you die in a deluded haze<br>
+    YOU DIE`,
     left: null,
     leftText: null,
     right: null,
     rightText: null,
   },
-    stay:
-    {
-        image: "./images/initial.png",
-        frame_count: 1,
-        text: `you sit where you are and close your eyes, your breathing slows, and
+  stay: {
+    image: "./images/fish.png",
+    frame_count: 1,
+    text: `you sit where you are and close your eyes, your breathing slows, and
 you become one with the ground beneath you, you can hear the wind
 blowing through the trees and this calms you. you hear movement in
 the water, you open your eyes and a school of fish have outgrown their
 small home. they beckon you as they follow one another into the depth
 of the wood. do you follow?`,
-        left: "follow",
-        leftText: "FOLLOW",
-        right: "ignore",
-        rightText: "STAY",
-    },
-    follow:
-    {
-        image: "./images/initial.png",
-        frame_count: 1,
-        text: `you rise and begin to follow the fish, and their trail leads to an
-exit you never saw before. you escape!`,
-        left: null,
-        leftText: null,
-        right: null,
-        rightText: null,
-    },
-    ignore:
-    {
-        image: "./images/_Death_Scene.png",
-        frame_count: 9,
-        text: `figuring it is just another delusion, you close your eyes once
-again. you die from low blood pressure`,
-        left: null,
-        leftText: null,
-        right: null,
-        rightText: null,
-    },
-    forest_left2:
-    {
-        image: "./images/initial.png",
-        frame_count: 1,
-        text: `its probably not safe, after taking in the serenity, you continue walking and you
+    left: "follow",
+    leftText: "FOLLOW",
+    right: "ignore",
+    rightText: "STAY",
+  },
+  follow: {
+    image: "./images/initial.png",
+    frame_count: 1,
+    text: `you rise and begin to follow the fish, and their
+trail leads to another creature or something
+philosophical. Or something ANOTHER CHOICE YAY,
+maybe you meet the leader of the fish and he
+offers you a gift something to help with your
+journey??!`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  ignore: {
+    image: "./images/_Death_Scene.png",
+    frame_count: 9,
+    text: `figuring it is just another delusion, you close your eyes once
+again. you die from low blood pressure<br>YOU DIE`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  forest_left2: {
+    image: "./images/Cabin_Ext.png",
+    frame_count: 1,
+    text: `its probably not safe, after taking in the serenity, you continue walking and you
 come across a rundown cabin. you come across a rundown cabin. go inside?`,
-        left: "cabin",
-        leftText: "YES",
-        right: "forest_left3",
-        rightText: "NO",
-    },
-    forest_left3:
-    {
-        image: "./images/_Death_Scene.png",
-        frame_count: 9,
-        text: `Cabin is too creepy, not a fan of the vibes, you turn around and
-        walk back the way you came, but the path is gone. you die`,
-        left: null,
-        leftText: null,
-        right: null,
-        rightText: null,
-    },
-    cabin:
-    {
-        image: "./images/initial.png",
-        frame_count: 1,
-        text: `You go inside the cabin, you can either fish or refuse (what)`,
-        left: "fish",
-        leftText: "FISH",
-        right: "refuse",
-        rightText: "NO",
-    },
-    fish:
-    {
-        image: "./images/initial.png",
-        frame_count: 1,
-        text: `You fish and catch a fish, it is a very shiny fish, you feel accomplished, you win!`,
-        left: null,
-        leftText: null,
-        right: null,
-        rightText: null,
-    },
-    refuse:
-    {
-        image: "./images/_Death_Scene.png",
-        frame_count: 9,
-        text: `You refuse to fish, and the cabin begins to collapse around you, you die`,
-        left: null,
-        leftText: null,
-        right: null,
-        rightText: null,
-    },
+    left: "cabin",
+    leftText: "YES",
+    right: "forest_left3",
+    rightText: "NO",
+  },
+  forest_left3: {
+    image: "./images/_Death_Scene.png",
+    frame_count: 9,
+    text: `you start feeling nauseous it becomes harder to breath as the air feels
+thicker and viscous, you lose consciousness,<br> YOU DIE`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  cabin: {
+    image: "./images/Cabin_Int_Goat.png",
+    frame_count: 1,
+    text: `You enter the cabin, the horrors of the outside world seem to dull as you
+are met face to face with a pregnant creature, a goat for a face, she looks
+over you with a paternal love and hums a lullaby, you begin to speak but
+her voice washes over you " my child will be here soon, I can let you stay
+here until whatever you're running from leaves, but after that I must ask
+you a favour; that clearing outside holds fish that my child can eat when
+it is born, may you fish me some, and I will allow you to stay"`,
+    left: "fish",
+    leftText: "FISH",
+    right: "refuse",
+    rightText: "NO",
+  },
+  refuse: {
+    image: "./images/_Goat_death.png",
+    frame_count: 10,
+    text: `the lullaby the goat is singing gets louder, and envelops your whole
+    being, you are no longer at the will of your own body, the last thing you see is
+    the distorting face of the goat before your vision depletes.<br>
+    YOU DIE.`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  fish: {
+    image: "./images/fish_in_hand.png",
+    frame_count: 1,
+    text: `As you pull the fish out of the water, they all rise and speak in unisono ,
+    demanding you free them from your grasp, you feel yourself being dragged into the
+    water, do you fight them off or begin to see their point of view and join them.`,
+    left: "allow_pull",
+    leftText: "ALLOW",
+    right: "fight_back",
+    rightText: "fight",
+  },
+  allow_pull: {
+    image: "./images/Cabin_Ext.png",
+    frame_count: 1,
+    text: `you pass out as they continue dragging you, you open your eyes again as you’re
+passing through shapes and colours at hyper speed, and it no longer feels as if you
+are underwater, you surface Infront of the cabin. Go inside ?`,
+    left: "go_inside",
+    leftText: "YES",
+    right: "go_away",
+    rightText: "NO",
+  },
+  go_away: {
+    image: "./images/_Death_Scene.png",
+    frame_count: 9,
+    text: `you start feeling nauseous it becomes harder to breath as the air feels
+thicker and viscous, you lose consciousness,<br>
+    YOU DIE`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  go_inside: {
+    image: "./images/Cabin_Int_Fish.png",
+    frame_count: 1,
+    text: `You enter the cabin, the horrors of the outside world seem to dull as you
+are met face to face with a pregnant creature, a fish. she hums a lullaby,
+you begin to speak but her voice washes over you ‘your life may be filled
+with love or regret. That's what has been leading you through this forest.
+Two sides. A dark and light. Safe decisions are meaningless. Your primality
+is skewed here. Forests are always ever changing. Prehistoric, yet new, new
+life and death happens constantly here, with or without humans. A place
+filled with contradictions, protection yet a fear of what resides here, a
+settlement that you do not belong. Logic does not apply here. The forest
+reads you, not you read it. I ask you, why do you think you are you here?`,
+    left: "fear",
+    leftText: "FEAR",
+    right: "fate",
+    rightText: "FATE",
+  },
+  fear: {
+    image: "./images/_Death_Scene.png",
+    frame_count: 9,
+    text: `"You are afraid of the unknown, you are afraid of the forest, you are afraid of
+    the creature, you are afraid of the goat, you are afraid of the fish, you are
+    afraid of the twins, you are afraid of the bones, you are afraid of the apple,
+    you are afraid of the fire, you are afraid of the tree, you are afraid of the
+    cabin, you are afraid of the water, you are afraid of the forest, you are afraid of what you are, this is your being. You must learn peace" <br>
+    YOU DIE`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  fate: {
+    image: "./images/initial.png",
+    frame_count: 1,
+    text: `‘I see’ The fish seems to like this answer. Your vision blurs and the form distorts
+back into the goat. No longer pregnant. Kitten in arms. You find yourself with a
+fish in your own arms. You feed the kitten.<br>
+YOU WIN`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  fight_back: {
+    image: "./images/fish_in_hand.png",
+    frame_count: 1,
+    text: `ou fight back with the fish and wriggle out of their grasp, managing
+to grab one in the meantime. Your head fills with louder whispers the longer you
+hold it, begging you to spare it. Do you bring it back to the child?`,
+    left: "bring_back",
+    leftText: "YES",
+    right: "eat_fish",
+    rightText: "NO",
+  },
+  bring_back: {
+    image: "./images/Cabin_Ext.png",
+    frame_count: 1,
+    text: `You return to the cabin, fish in hand. The creature looks up at you, holding a
+white kitten in its arms. You feed the kitten. <br>
+YOU WIN.`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
+  eat_fish: {
+    image: "./images/_Death_Scene.png",
+    frame_count: 9,
+    text: `Hearing the creatures cries, you spare it and return it to the water. A voice still
+envelops your head getting unbearably loud.<br>
+YOU DIE`,
+    left: null,
+    leftText: null,
+    right: null,
+    rightText: null,
+  },
 };
